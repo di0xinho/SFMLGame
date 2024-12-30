@@ -38,13 +38,13 @@ Celem pracy jest dokonanie analizy porównawczej bibliotek Raylib, SFML i SDL2, 
 W oknie konsoli wpisz komendę:
 
 ```bash
-$ git clone https://github.com/di0xinho/SFML_Game.git
+$ git clone https://github.com/di0xinho/SFMLGame.git
 ```
 
 2. Przejdź do katalogu z projektem:
 
 ```bash
-$ cd SFMLGame
+$ cd SFML_Game
 ```
 
 ## Budowanie projektu
