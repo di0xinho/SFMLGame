@@ -1,0 +1,8 @@
+{
+  "name": "sfml-game",
+  "version": "1.0.0",
+  "dependencies": [
+    "sfml",
+    "nlohmann-json"
+  ]
+}
