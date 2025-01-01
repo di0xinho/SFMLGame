@@ -2,6 +2,8 @@
 #define GAME_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 
 class Game {
 public:
@@ -18,7 +20,14 @@ public:
 
 private:
 
+    // Zmienne 
+    sf::RenderWindow* window;
+    sf::Event event;
+
+    // Funkcje
     void initWindow();
+
+
 };
 
 #endif 
