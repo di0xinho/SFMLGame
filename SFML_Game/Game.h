@@ -1,9 +1,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
+#include "State.h"
 
 class Game {
 public:
@@ -16,6 +14,7 @@ public:
 
     void processEvents();    // Obs³uga wejœcia
     void update();           // Metoda aktualizacji
+    void updateDeltaTime();
     void render();           // Renderowanie grafiki
 
 private:
@@ -23,6 +22,9 @@ private:
     // Zmienne 
     sf::RenderWindow* window;
     sf::Event event;
+
+    float deltaTime;
+    sf::Clock deltaTimeClock;
 
     // Funkcje
     void initWindow();

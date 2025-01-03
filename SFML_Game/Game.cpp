@@ -1,8 +1,36 @@
 #include "Game.h"
+#include <nlohmann/json.hpp>
+#include <iostream>
+#include <fstream>
 
 // Metoda inicjalizuj¹ca okno gry
 void Game::initWindow() {
-	this->window = new sf::RenderWindow(sf::VideoMode(800, 600), "Platformer Game");
+	
+    // Tworzymy strumien wejsciowy do wczytania pliku json z ustawieniami graficznymi
+    std::ifstream file("Config/graphics.json");
+
+    // Sprawdzamy czy plik zostal otwarty poprawnie
+    if (!file.is_open()) {
+        std::cerr << "Nie mozna wczytac pliku konfiguracyjnego" << std::endl;
+        exit(1);
+    }
+
+    // Tworzymy obiekt, ktory bedzie przechowywac dane z configu
+    nlohmann::json configuration;
+
+    // Odczytywanie pliku konfiguracyjnego i deserializacja do obiektu "configuration"
+    file >> configuration;
+
+    // Dane wczytujemy do poszczegolnych zmiennych
+    std::string title = configuration.at("name").get<std::string>();
+    int height = configuration.at("window_height").get<int>();
+    int width = configuration.at("window_width").get<int>();
+    unsigned int frame_limit = configuration.at("framelimit").get<int>();
+    bool verticalSync = configuration.at("verticalSync").get<bool>();
+
+    this->window = new sf::RenderWindow(sf::VideoMode(height, width), title);
+    this->window->setFramerateLimit(frame_limit);
+    this->window->setVerticalSyncEnabled(verticalSync);
 }
 
 // Definicja konstruktora/destruktora
@@ -19,6 +47,10 @@ Game::~Game() {
 // Aktualizacja logiki gry - metoda aktualizacji (np. ruchy postaci, fizyka)
 void Game::update() {
     this->processEvents();
+}
+
+void Game::updateDeltaTime() {
+    this->deltaTime = this->deltaTimeClock.restart().asSeconds();
 }
 
 // Metoda do renderowania grafiki 
